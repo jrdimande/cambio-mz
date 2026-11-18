@@ -8,7 +8,7 @@ import ComparisonChart from '../components/ComparisonChart.vue'
 import CurrencyTable from '../components/CurrencyTable.vue'
 import CurrencyFlag from '../components/CurrencyFlag.vue'
 
-const { currencies, hasCurrencies } = useCurrencies()
+const { currencies, hasCurrencies, usingFallback } = useCurrencies()
 const ranked = computed(() => currencies.value.slice().sort((a, b) => b.valueMzn - a.valueMzn))
 </script>
 
@@ -19,7 +19,7 @@ const ranked = computed(() => currencies.value.slice().sort((a, b) => b.valueMzn
       <h2>Converta e compare moedas.</h2>
       <div class="intro-bottom">
         <p>Simule conversões e consulte valores de referência em meticais.</p>
-        <span class="sample-notice"><i class="bi bi-info-circle"></i> Dados sintéticos para demonstração</span>
+        <span class="sample-notice"><i class="bi bi-info-circle"></i> {{ usingFallback ? 'Dados locais de demonstração' : 'Taxas de referência via API' }}</span>
       </div>
     </section>
 
@@ -46,7 +46,7 @@ const ranked = computed(() => currencies.value.slice().sort((a, b) => b.valueMzn
               <strong>{{ formatNumber(currency.valueMzn) }} <small>MZN</small></strong>
             </div>
           </div>
-          <p class="list-footnote">Valores sintéticos; não representam taxas de mercado.</p>
+          <p class="list-footnote">Taxas indicativas; confirme os valores junto da sua instituição financeira.</p>
         </section>
       </section>
     </template>

@@ -30,8 +30,8 @@ const links = [
     <div class="sidebar-bottom">
       <div class="sidebar-demo-card">
         <div class="demo-icon"><i class="bi bi-bar-chart-line"></i></div>
-        <p>Dados de demonstração</p>
-        <small>As cotações são sintéticas e não devem ser usadas em transações.</small>
+        <p>Cotações via API</p>
+        <small>Valores de referência atualizados a partir de uma API externa.</small>
       </div>
       <div class="sidebar-legal">© {{ new Date().getFullYear() }} Cambio-MZ</div>
     </div>

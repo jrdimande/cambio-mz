@@ -1,6 +1,6 @@
 # Cambio-MZ
 
-Interface demonstrativa de consulta e conversão de moedas em Moçambique.
+Aplicação de consulta e conversão de moedas em Moçambique, com taxas de referência obtidas pela API [Open ER API](https://open.er-api.com/).
 
 ## Desenvolvimento
 
@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-A aplicação usa valores sintéticos de demonstração, definidos em `src/data/demoCurrencies.js`, para que os formulários, gráficos e conversor possam ser explorados sem uma API. Estes valores não são taxas reais e não devem ser usados em transações.
+A aplicação consulta a API Open ER para obter taxas de referência com base no metical (MZN). Se a API estiver indisponível, usa os valores locais de demonstração em `src/data/demoCurrencies.js`. As taxas são indicativas, podem ter atraso e diferir das praticadas por instituições financeiras; confirme sempre a taxa antes de uma transação.
 
 ## Build e GitHub Pages
 
@@ -24,4 +24,4 @@ O build usa `/cambio-mz/` como base para o repositório `jrdimande/cambio-mz`, e
 
 ## Conversão
 
-O conversor usa os valores sintéticos apenas para demonstrar a interação dos campos e o cálculo. Não apresenta taxas atuais nem cotações garantidas.
+O conversor calcula estimativas a partir das taxas carregadas pela API (ou dos valores locais de demonstração, quando a API falha). Não garante a taxa final de uma transação.

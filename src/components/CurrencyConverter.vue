@@ -87,8 +87,8 @@ function clear() {
 
 <template>
   <section class="converter-panel" :class="{ 'compact-converter': compact }">
-    <div v-if="currencies.length < 2" class="converter-unavailable">
-      <i class="bi bi-currency-exchange"></i><span>Adicione moedas de exemplo para experimentar o conversor.</span>
+      <div v-if="currencies.length < 2" class="converter-unavailable">
+      <i class="bi bi-currency-exchange"></i><span>As taxas ainda não estão disponíveis. Tente novamente mais tarde.</span>
     </div>
     <template v-else>
       <div class="conversion-fields">
@@ -100,10 +100,10 @@ function clear() {
       </div>
       <div v-if="result !== null" class="conversion-summary"><span id="conversion-help"><i class="bi bi-check-circle-fill"></i> Resultado estimado</span><button type="button" aria-label="Limpar conversão" @click="clear"><i class="bi bi-arrow-counterclockwise"></i> Limpar</button></div>
       <div v-else class="conversion-summary"><span id="conversion-help" :class="{ 'conversion-invalid': hasAmount }"><i :class="['bi', hasAmount ? 'bi-exclamation-circle-fill' : 'bi-info-circle-fill']"></i> {{ hasAmount ? 'Introduza um valor positivo válido' : 'Introduza um valor para converter' }}</span><button type="button" aria-label="Limpar conversão" @click="clear"><i class="bi bi-arrow-counterclockwise"></i> Limpar</button></div>
-      <div class="converter-note"><i class="bi bi-info-circle" aria-hidden="true"></i><span>Valores de demonstração, sem ligação ao mercado.</span></div>
+      <div class="converter-note"><i class="bi bi-info-circle" aria-hidden="true"></i><span>Estimativa baseada em taxas de referência da API; confirme a taxa final junto da instituição financeira.</span></div>
       <form v-if="allowEmail && !compact && result !== null && Number.isFinite(result)" class="conversion-email" novalidate @submit.prevent="sendResult">
         <h3>Enviar resultado por e-mail</h3>
-        <p>Envie esta simulação com valores demonstrativos para o seu e-mail.</p>
+        <p>Envie esta estimativa de conversão para o seu e-mail.</p>
         <div class="conversion-email-fields">
           <label><span>Endereço de e-mail</span><input v-model="email" type="email" autocomplete="email" required placeholder="nome@exemplo.com" :aria-invalid="emailStatus === 'error' ? 'true' : undefined" /></label>
           <button type="submit" :disabled="sending"><i class="bi bi-envelope"></i> {{ sending ? 'A enviar…' : 'Enviar resultado' }}</button>

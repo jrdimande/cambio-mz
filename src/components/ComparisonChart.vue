@@ -35,7 +35,7 @@ function renderChart() {
       animation: { duration: 200 },
       plugins: {
         legend: { display: false },
-        tooltip: { callbacks: { label: (context) => ` ${formatNumber(context.parsed.x)} MZN · exemplo` } },
+        tooltip: { callbacks: { label: (context) => ` ${formatNumber(context.parsed.x)} MZN · indicativo` } },
       },
       scales: {
         x: { beginAtZero: true, grid: { color: chartGrid, drawBorder: false }, border: { display: false }, ticks: { color: chartText, font: { family: 'Inter' } } },
@@ -60,11 +60,11 @@ onBeforeUnmount(() => {
 <template>
   <section class="chart-panel">
     <div class="panel-heading chart-heading">
-      <div><span class="section-kicker">VALORES SINTÉTICOS</span><h2>Comparação de valores</h2><p>Valor de uma unidade de cada moeda, em MZN.</p></div>
-      <span class="chart-legend"><i></i> Valor de exemplo</span>
+      <div><span class="section-kicker">TAXAS DE REFERÊNCIA</span><h2>Comparação de valores</h2><p>Valor de uma unidade de cada moeda, em MZN.</p></div>
+      <span class="chart-legend"><i></i> Valor indicativo</span>
     </div>
     <div v-if="!ranked.length" class="chart-empty"><i class="bi bi-bar-chart"></i><span>Sem valores disponíveis para comparar.</span></div>
-    <div v-else class="chart-canvas-wrap" :class="{ 'compact-chart': compact }"><canvas ref="canvas" aria-label="Gráfico de comparação dos valores de demonstração" role="img"></canvas></div>
-    <div class="chart-disclaimer"><i class="bi bi-info-circle"></i> Dados sintéticos apenas para demonstração; não representam taxas reais nem histórico de mercado.</div>
+    <div v-else class="chart-canvas-wrap" :class="{ 'compact-chart': compact }"><canvas ref="canvas" aria-label="Gráfico de comparação das taxas de referência" role="img"></canvas></div>
+    <div class="chart-disclaimer"><i class="bi bi-info-circle"></i> Taxas indicativas obtidas por API; não representam histórico de mercado nem garantem a taxa de uma transação.</div>
   </section>
 </template>

@@ -34,7 +34,7 @@ const filteredCurrencies = computed(() => {
 <template>
   <section class="table-panel">
     <div class="panel-heading table-heading">
-      <div><span class="section-kicker">VALORES SINTÉTICOS · DEMONSTRAÇÃO</span><h2>Valores por moeda</h2><p>Valores de referência expressos em meticais (MZN).</p></div>
+      <div><span class="section-kicker">TAXAS DE REFERÊNCIA</span><h2>Valores por moeda</h2><p>Valores de referência expressos em meticais (MZN).</p></div>
       <div class="table-controls">
         <label class="table-search"><i class="bi bi-search"></i><input v-model="search" placeholder="Pesquisar moeda..." aria-label="Pesquisar moeda" /></label>
         <button class="sort-button" :aria-label="direction === 'desc' ? 'Ordenar crescente' : 'Ordenar decrescente'" @click="direction = direction === 'desc' ? 'asc' : 'desc'">
@@ -44,7 +44,7 @@ const filteredCurrencies = computed(() => {
     </div>
     <div class="table-responsive">
       <table class="table currency-table">
-        <thead><tr><th>MOEDA</th><th class="currency-code-column">CÓDIGO</th><th class="text-end">VALOR DE EXEMPLO</th><th class="table-action-column"></th></tr></thead>
+        <thead><tr><th>MOEDA</th><th class="currency-code-column">CÓDIGO</th><th class="text-end">VALOR DE REFERÊNCIA</th><th class="table-action-column"></th></tr></thead>
         <tbody>
           <tr v-for="currency in filteredCurrencies" :key="currency.code">
             <td><div class="table-currency"><CurrencyFlag :country-code="currency.countryCode" :country-name="currency.country" /><strong>{{ currency.name }}</strong><span class="table-code-inline">{{ currency.code }}</span></div></td>
@@ -56,6 +56,6 @@ const filteredCurrencies = computed(() => {
         </tbody>
       </table>
     </div>
-    <div class="table-footnote"><i class="bi bi-info-circle"></i> Valores sintéticos, sem ligação a taxas de mercado ou instituições financeiras. Não utilizar em transações.</div>
+    <div class="table-footnote"><i class="bi bi-info-circle"></i> Taxas indicativas obtidas por API; podem diferir das taxas praticadas por instituições financeiras.</div>
   </section>
 </template>

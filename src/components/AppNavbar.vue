@@ -25,7 +25,7 @@ function search() {
         <kbd>↵</kbd>
       </form>
       <div class="top-date"><i class="bi bi-calendar3"></i><span>{{ today }}</span></div>
-      <span class="demo-badge"><i></i> MODO DEMONSTRAÇÃO</span>
+      <span class="demo-badge"><i></i> TAXAS DE REFERÊNCIA</span>
       <button
         class="theme-toggle"
         type="button"
