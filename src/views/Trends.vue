@@ -69,6 +69,8 @@ function renderChart() {
   if (!canvas.value || observations.value.length < 2) return
   const theme = getComputedStyle(document.documentElement)
   const textColor = theme.getPropertyValue('--chart-text').trim() || '#66736b'
+  const upColor = theme.getPropertyValue('--chart-up').trim() || '#317b5a'
+  const downColor = theme.getPropertyValue('--chart-down').trim() || '#be4949'
   const first = observations.value[0].rate
   const changes = observations.value.map((item) => ((first / item.rate) - 1) * 100)
   chart?.destroy()
@@ -80,14 +82,14 @@ function renderChart() {
         label: 'Variação desde o início',
         data: changes,
         borderWidth: 2.5,
-        borderColor: '#317b5a',
+      borderColor: upColor,
         segment: {
-          borderColor: (context) => context.p1.parsed.y >= context.p0.parsed.y ? '#317b5a' : '#be4949',
+          borderColor: (context) => context.p1.parsed.y >= context.p0.parsed.y ? upColor : downColor,
         },
         pointRadius: 2.5,
         pointHoverRadius: 5,
-        pointBackgroundColor: changes.map((value) => value >= 0 ? '#317b5a' : '#be4949'),
-        pointBorderColor: changes.map((value) => value >= 0 ? '#317b5a' : '#be4949'),
+      pointBackgroundColor: changes.map((value) => value >= 0 ? upColor : downColor),
+      pointBorderColor: changes.map((value) => value >= 0 ? upColor : downColor),
         tension: 0.25,
         fill: false,
       }],
