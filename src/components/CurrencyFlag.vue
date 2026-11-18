@@ -22,9 +22,15 @@ const flagArtwork = {
 const failed = ref(false)
 const artwork = computed(() => {
   const countryCode = props.countryCode?.toLowerCase()
-  return failed.value ? flagArtwork.default : (flagArtwork[countryCode] ?? flagArtwork.default)
+  if (failed.value) return flagArtwork.default
+  if (flagArtwork[countryCode]) return flagArtwork[countryCode]
+  return /^[a-z]{2}$/.test(countryCode ?? '')
+    ? `https://flagcdn.com/w40/${countryCode}.png`
+    : flagArtwork.default
 })
-const source = computed(() => `data:image/svg+xml,${encodeURIComponent(artwork.value)}`)
+const source = computed(() => artwork.value.startsWith('<svg')
+  ? `data:image/svg+xml,${encodeURIComponent(artwork.value)}`
+  : artwork.value)
 
 watch(() => props.countryCode, () => { failed.value = false })
 

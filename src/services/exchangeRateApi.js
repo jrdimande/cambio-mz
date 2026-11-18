@@ -1,5 +1,21 @@
 const API_URL = 'https://api.frankfurter.dev/v2'
 const currencyNames = new Intl.DisplayNames(['pt-MZ', 'pt'], { type: 'currency' })
+const regionNames = new Intl.DisplayNames(['pt-MZ', 'pt'], { type: 'region' })
+
+// Most ISO 4217 currency codes start with their issuing country's ISO 3166 code.
+// Regional and supranational currencies need explicit representatives.
+const CURRENCY_REGIONS = {
+  EUR: 'EU', ANG: 'CW', XAF: 'CM', XOF: 'SN', XCD: 'AG', XPF: 'PF',
+  BOV: 'BO', CHE: 'CH', CHW: 'CH', CLF: 'CL', CNH: 'CN', CUC: 'CU',
+  GGP: 'GG', IMP: 'IM', JEP: 'JE', MXV: 'MX', SLE: 'SL', UYI: 'UY',
+  UYW: 'UY', VED: 'VE',
+}
+
+function getCurrencyRegion(code) {
+  if (CURRENCY_REGIONS[code]) return CURRENCY_REGIONS[code]
+  if (code.length === 3 && /^[A-Z]{3}$/.test(code) && !code.startsWith('X')) return code.slice(0, 2)
+  return ''
+}
 
 async function getJson(url) {
   const response = await fetch(url)
@@ -24,13 +40,20 @@ export async function fetchExchangeRates() {
   const supportedCodes = new Set(rateByCode.keys())
   const currencies = catalog
     .filter(({ iso_code: code }) => supportedCodes.has(code))
-    .map(({ iso_code: code, name }) => ({
-      code,
-      name: getCurrencyName(code, name),
-      country: getCurrencyName(code, name),
-      countryCode: '',
-      valueMzn: parseFloat((1 / rateByCode.get(code)).toFixed(6)),
-    }))
+    .map(({ iso_code: code, name }) => {
+      const countryCode = getCurrencyRegion(code)
+      let country = getCurrencyName(code, name)
+      if (countryCode) {
+        try { country = regionNames.of(countryCode) || country } catch { /* Use the currency name as a fallback. */ }
+      }
+      return {
+        code,
+        name: getCurrencyName(code, name),
+        country,
+        countryCode: countryCode.toLowerCase(),
+        valueMzn: parseFloat((1 / rateByCode.get(code)).toFixed(6)),
+      }
+    })
     .filter(({ valueMzn }) => Number.isFinite(valueMzn))
     .sort((a, b) => a.name.localeCompare(b.name, 'pt'))
   const latestDate = rates.reduce((latest, row) => row.date > latest ? row.date : latest, '')

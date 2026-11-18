@@ -24,4 +24,4 @@ O build usa `/cambio-mz/` como base para o repositório `jrdimande/cambio-mz`, e
 
 ## Conversão
 
-O conversor calcula estimativas a partir das taxas carregadas pela API (ou dos valores locais de demonstração, quando a API falha). A página **Tendências** apresenta séries históricas em gráficos de barras para períodos de 30 dias, 90 dias e um ano. Os dados históricos são taxas de referência diárias, não previsões nem cotações de transação.
+O conversor calcula estimativas a partir das taxas carregadas pela API (ou dos valores locais de demonstração, quando a API falha). A página **Tendências** apresenta séries históricas em gráficos de linhas para períodos de 30 dias, 90 dias e um ano. Os dados históricos são taxas de referência diárias, não previsões nem cotações de transação.

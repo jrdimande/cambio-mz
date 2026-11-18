@@ -74,15 +74,23 @@ function renderChart() {
   const changes = observations.value.map((item) => ((first / item.rate) - 1) * 100)
   chart?.destroy()
   chart = new Chart(canvas.value, {
-    type: 'bar',
+      type: 'line',
     data: {
       labels: observations.value.map((item) => formatDate(item.date)),
       datasets: [{
         label: 'Variação desde o início',
         data: changes,
-        backgroundColor: changes.map((value) => value >= 0 ? 'rgba(49, 123, 90, .78)' : 'rgba(190, 73, 73, .72)'),
-        borderRadius: 2,
-        borderSkipped: false,
+        borderWidth: 2.5,
+        borderColor: '#317b5a',
+        segment: {
+          borderColor: (context) => context.p1.parsed.y >= context.p0.parsed.y ? '#317b5a' : '#be4949',
+        },
+        pointRadius: 2.5,
+        pointHoverRadius: 5,
+        pointBackgroundColor: changes.map((value) => value >= 0 ? '#317b5a' : '#be4949'),
+        pointBorderColor: changes.map((value) => value >= 0 ? '#317b5a' : '#be4949'),
+        tension: 0.25,
+        fill: false,
       }],
     },
     options: {
@@ -150,7 +158,7 @@ onBeforeUnmount(() => {
       <div v-if="loading" class="chart-empty"><i class="bi bi-arrow-repeat spinning"></i><span>A carregar histórico cambial…</span></div>
       <div v-else-if="usingFallback" class="chart-empty"><i class="bi bi-wifi-off"></i><span>O histórico exige uma ligação à API; os dados locais são apenas para demonstração.</span></div>
       <div v-else-if="error" class="chart-empty"><i class="bi bi-exclamation-circle"></i><span>{{ error }}</span><button type="button" class="refresh-button" @click="loadTrend">Tentar novamente</button></div>
-      <div v-else class="chart-canvas-wrap trend-canvas"><canvas ref="canvas" aria-label="Gráfico de barras da tendência cambial" role="img"></canvas></div>
+      <div v-else class="chart-canvas-wrap trend-canvas"><canvas ref="canvas" aria-label="Gráfico de linhas da tendência cambial" role="img"></canvas></div>
       <div class="chart-disclaimer"><i class="bi bi-info-circle"></i> Dados históricos de referência, publicados por fontes oficiais e bancos centrais. A tendência passada não prevê valores futuros nem representa uma cotação de transação.</div>
     </section>
   </div>
