@@ -37,7 +37,7 @@ watch(() => route.fullPath, () => { menuOpen.value = false })
   <div class="app-shell">
     <AppSidebar :open="menuOpen" @close="menuOpen = false" />
     <div class="app-main">
-      <AppNavbar :title="route.meta.title" :eyebrow="route.meta.eyebrow" :dark-mode="darkMode" @toggle-menu="menuOpen = !menuOpen" @toggle-theme="darkMode = !darkMode" />
+      <AppNavbar :title="route.meta.title" :eyebrow="route.meta.eyebrow" :dark-mode="darkMode" :menu-open="menuOpen" @toggle-menu="menuOpen = !menuOpen" @toggle-theme="darkMode = !darkMode" />
       <main class="page-content">
         <RouterView />
       </main>

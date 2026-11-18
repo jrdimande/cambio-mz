@@ -8,7 +8,7 @@ import ComparisonChart from '../components/ComparisonChart.vue'
 import CurrencyTable from '../components/CurrencyTable.vue'
 import CurrencyFlag from '../components/CurrencyFlag.vue'
 
-const { currencies, hasCurrencies, usingFallback } = useCurrencies()
+const { currencies, hasCurrencies, loading, error, loadRates, usingFallback } = useCurrencies()
 const ranked = computed(() => currencies.value.slice().sort((a, b) => b.valueMzn - a.valueMzn))
 </script>
 
@@ -50,5 +50,11 @@ const ranked = computed(() => currencies.value.slice().sort((a, b) => b.valueMzn
         </section>
       </section>
     </template>
+    <section v-else class="chart-empty dashboard-empty" :aria-busy="loading" role="status">
+      <i :class="['bi', loading ? 'bi-arrow-repeat spinning' : 'bi-exclamation-circle']"></i>
+      <strong>{{ loading ? 'A carregar as taxas…' : 'Não foi possível carregar as moedas.' }}</strong>
+      <p>{{ loading ? 'Estamos a obter os valores de referência mais recentes.' : (error || 'Verifique a ligação e tente novamente.') }}</p>
+      <button v-if="!loading" type="button" class="refresh-button" @click="loadRates">Tentar novamente</button>
+    </section>
   </div>
 </template>

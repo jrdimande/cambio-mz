@@ -1,11 +1,15 @@
 /* Cambio MZ visual system: restrained surfaces, clear type and explicit states. */
 :root {
   color-scheme: light;
-  --green: #176b4b;
-  --green-dark: #10543a;
-  --green-soft: #eaf2ed;
-  --red: #b5473f;
-  --yellow: #c79522;
+  --flag-green: #007a3d;
+  --flag-black: #171717;
+  --flag-yellow: #fce100;
+  --flag-red: #d21034;
+  --green: var(--flag-green);
+  --green-dark: #005b2e;
+  --green-soft: #e8f2eb;
+  --red: var(--flag-red);
+  --yellow: #c59d00;
   --ink: #202a24;
   --muted: #66736b;
   --line: #dfe5e0;
@@ -27,10 +31,12 @@ button { color: inherit; }
 .app-shell { background: var(--page); }
 .app-sidebar { width: 236px; padding: 25px 18px 16px; background: var(--surface); border-right: 1px solid var(--line); box-shadow: none; }
 .brand-lockup { gap: 10px; padding: 2px 5px 42px; }
-.brand-mark { width: 34px; height: 34px; border-radius: 5px; background: var(--green); box-shadow: none; transform: none; }
-.brand-mark span { font: 700 20px/1 'Inter', sans-serif; transform: none; }
+.brand-home { min-width: 0; display: inline-flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; }
+.brand-home:hover { color: inherit; }
+.brand-mark { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 9px; background: transparent; box-shadow: none; object-fit: contain; }
+.brand-copy { min-width: 0; display: grid; gap: 3px; }
 .brand-name { font: 700 16px/1.15 'Inter', sans-serif; letter-spacing: -.5px; }
-.brand-name span { color: var(--green); font-weight: 500; }
+.brand-name span { color: var(--flag-red); font-weight: 700; }
 .brand-lockup small { color: var(--muted); font-size: 10px; }
 .nav-caption, .section-kicker { color: #758178; font-size: 10px; letter-spacing: .8px; }
 .nav-caption { padding-inline: 10px; }
@@ -61,7 +67,7 @@ button { color: inherit; }
 .page-stack { gap: 30px; }
 .dashboard-intro { padding: 0 0 22px; border-bottom: 1px solid var(--line); }
 .intro-overline { color: var(--muted); font-size: 10px; letter-spacing: .8px; }
-.intro-overline span { width: 18px; height: 2px; background: var(--green); }
+.intro-overline span { width: 26px; height: 3px; background: linear-gradient(90deg, var(--flag-green) 0 35%, var(--flag-black) 35% 60%, var(--flag-yellow) 60% 80%, var(--flag-red) 80%); }
 .dashboard-intro h2 { max-width: 760px; margin: 13px 0 10px; color: var(--ink); font: 600 clamp(27px, 3vw, 38px)/1.16 'Inter', sans-serif; letter-spacing: -1.1px; }
 .intro-bottom { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
 .intro-bottom p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -71,6 +77,10 @@ button { color: inherit; }
 .text-link { color: var(--green-dark); font-size: 12px; font-weight: 650; white-space: nowrap; }
 .text-link:hover { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
 .dashboard-converter { padding-top: 1px; }
+.dashboard-empty { min-height: 220px; padding: 24px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); text-align: center; }
+.dashboard-empty strong { color: var(--ink); font-size: 16px; }
+.dashboard-empty p { max-width: 440px; margin: 0 auto; color: var(--muted); }
+.dashboard-empty .refresh-button { margin-top: 4px; }
 .dashboard-data-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); gap: 18px; align-items: stretch; }
 .currency-list-panel, .chart-panel, .converter-panel, .table-panel, .about-card, .stat-card, .currency-card { min-width: 0; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); box-shadow: none; }
 .currency-list-panel { padding: 19px 20px 12px; }

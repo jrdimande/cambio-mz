@@ -1,6 +1,9 @@
 <script setup>
+import { RouterLink } from 'vue-router'
+
 defineProps({ open: Boolean })
 defineEmits(['close'])
+const logoUrl = `${import.meta.env.BASE_URL}cambio-mz-logo.svg`
 
 const links = [
   { to: '/', label: 'Visão geral', icon: 'bi-grid-1x2' },
@@ -13,16 +16,18 @@ const links = [
 </script>
 
 <template>
-  <aside class="app-sidebar" :class="{ 'is-open': open }">
+  <aside id="app-navigation" class="app-sidebar" :class="{ 'is-open': open }">
     <div class="brand-lockup">
-      <div class="brand-mark"><span>c</span></div>
-      <div><span class="brand-name">cambio<span>mz</span></span><small>Ferramentas de câmbio</small></div>
+      <RouterLink to="/" class="brand-home" aria-label="Cambio-MZ — voltar à visão geral">
+        <img class="brand-mark" :src="logoUrl" alt="" />
+        <span class="brand-copy"><span class="brand-name">Cambio<span>-MZ</span></span><small>Taxas em meticais</small></span>
+      </RouterLink>
       <button class="sidebar-close" aria-label="Fechar menu" @click="$emit('close')"><i class="bi bi-x-lg"></i></button>
     </div>
 
     <div class="nav-caption">NAVEGAÇÃO</div>
     <nav class="side-nav" aria-label="Navegação principal">
-      <RouterLink v-for="link in links" :key="link.to" :to="link.to" class="side-link" :exact-active-class="link.to === '/' ? 'active' : ''">
+      <RouterLink v-for="link in links" :key="link.to" :to="link.to" class="side-link" :active-class="link.to === '/' ? '' : 'active'" exact-active-class="active">
         <i :class="['bi', link.icon]"></i><span>{{ link.label }}</span>
         <i v-if="link.to === '/'" class="bi bi-chevron-right nav-chevron"></i>
       </RouterLink>
