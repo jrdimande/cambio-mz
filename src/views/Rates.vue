@@ -1,8 +1,8 @@
 <script setup>
-import { useDemoCurrencies } from '../composables/useDemoCurrencies'
+import { useCurrencies } from '../composables/useCurrencies'
 import CurrencyTable from '../components/CurrencyTable.vue'
 
-const { currencies, refreshing, reloadDemo } = useDemoCurrencies()
+const { currencies, refreshing, reloadDemo } = useCurrencies()
 </script>
 
 <template>

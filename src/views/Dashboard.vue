@@ -1,14 +1,14 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useDemoCurrencies } from '../composables/useDemoCurrencies'
+import { useCurrencies } from '../composables/useCurrencies'
 import { formatNumber } from '../utils/formatters'
 import CurrencyConverter from '../components/CurrencyConverter.vue'
 import ComparisonChart from '../components/ComparisonChart.vue'
 import CurrencyTable from '../components/CurrencyTable.vue'
 import CurrencyFlag from '../components/CurrencyFlag.vue'
 
-const { currencies, hasCurrencies } = useDemoCurrencies()
+const { currencies, hasCurrencies } = useCurrencies()
 const ranked = computed(() => currencies.value.slice().sort((a, b) => b.valueMzn - a.valueMzn))
 </script>
 

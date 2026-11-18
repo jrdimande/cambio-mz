@@ -1,8 +1,8 @@
 <script setup>
-import { useDemoCurrencies } from '../composables/useDemoCurrencies'
+import { useCurrencies } from '../composables/useCurrencies'
 import CurrencyConverter from '../components/CurrencyConverter.vue'
 
-const { currencies } = useDemoCurrencies()
+const { currencies } = useCurrencies()
 </script>
 
 <template>
