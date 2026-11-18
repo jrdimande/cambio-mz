@@ -69,7 +69,6 @@ function renderChart() {
   if (!canvas.value || observations.value.length < 2) return
   const theme = getComputedStyle(document.documentElement)
   const textColor = theme.getPropertyValue('--chart-text').trim() || '#66736b'
-  const gridColor = theme.getPropertyValue('--chart-grid').trim() || '#e1e7e2'
   const first = observations.value[0].rate
   const changes = observations.value.map((item) => ((first / item.rate) - 1) * 100)
   chart?.destroy()
@@ -101,8 +100,8 @@ function renderChart() {
         tooltip: { callbacks: { label: (context) => ` ${formatNumber(context.parsed.y)}% desde o início do período` } },
       },
       scales: {
-        x: { grid: { display: false }, ticks: { color: textColor, maxTicksLimit: 10 } },
-        y: { title: { display: true, text: 'Variação (%)', color: textColor }, grid: { color: gridColor }, ticks: { color: textColor, callback: (value) => `${value}%` } },
+        x: { grid: { display: false }, border: { display: false }, ticks: { color: textColor, maxTicksLimit: 10 } },
+        y: { title: { display: true, text: 'Variação (%)', color: textColor }, grid: { display: false }, border: { display: false }, ticks: { color: textColor, callback: (value) => `${value}%` } },
       },
     },
   })

@@ -1,6 +1,7 @@
 const API_URL = 'https://api.frankfurter.dev/v2'
 const currencyNames = new Intl.DisplayNames(['pt-MZ', 'pt'], { type: 'currency' })
 const regionNames = new Intl.DisplayNames(['pt-MZ', 'pt'], { type: 'region' })
+const FEATURED_CRYPTO = new Set(['BTC', 'ETH', 'USDT'])
 
 // Most ISO 4217 currency codes start with their issuing country's ISO 3166 code.
 // Regional and supranational currencies need explicit representatives.
@@ -39,9 +40,10 @@ export async function fetchExchangeRates() {
   const rateByCode = new Map(rates.map(({ quote, rate }) => [quote, rate]))
   const supportedCodes = new Set(rateByCode.keys())
   const currencies = catalog
-    .filter(({ iso_code: code }) => supportedCodes.has(code))
-    .map(({ iso_code: code, name }) => {
-      const countryCode = getCurrencyRegion(code)
+    .filter(({ iso_code: code, type }) => supportedCodes.has(code)
+      && (type !== 'crypto' || FEATURED_CRYPTO.has(code)))
+    .map(({ iso_code: code, name, type }) => {
+      const countryCode = type === 'crypto' ? '' : getCurrencyRegion(code)
       let country = getCurrencyName(code, name)
       if (countryCode) {
         try { country = regionNames.of(countryCode) || country } catch { /* Use the currency name as a fallback. */ }
@@ -51,6 +53,7 @@ export async function fetchExchangeRates() {
         name: getCurrencyName(code, name),
         country,
         countryCode: countryCode.toLowerCase(),
+        type,
         valueMzn: parseFloat((1 / rateByCode.get(code)).toFixed(6)),
       }
     })

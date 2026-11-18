@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-A aplicação consulta a API pública [Frankfurter](https://frankfurter.dev/) para obter taxas de referência com base no metical (MZN). O catálogo da API disponibiliza mais de 200 moedas e ativos com taxas suportadas. Se a API estiver indisponível, usa os valores locais de demonstração em `src/data/demoCurrencies.js`. As taxas são indicativas, podem ter atraso e diferir das praticadas por instituições financeiras; confirme sempre a taxa antes de uma transação.
+A aplicação consulta a API pública [Frankfurter](https://frankfurter.dev/) para obter taxas de referência com base no metical (MZN). O catálogo inclui moedas com taxas suportadas e limita os criptoativos a Bitcoin (BTC), Ethereum (ETH) e Tether (USDT). Se a API estiver indisponível, usa os valores locais de demonstração em `src/data/demoCurrencies.js`. As taxas são indicativas, podem ter atraso e diferir das praticadas por instituições financeiras; confirme sempre a taxa antes de uma transação.
 
 ## Build e GitHub Pages
 
