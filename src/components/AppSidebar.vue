@@ -7,6 +7,7 @@ const links = [
   { to: '/conversor', label: 'Conversor', icon: 'bi-arrow-left-right' },
   { to: '/taxas', label: 'Taxas de câmbio', icon: 'bi-list-columns-reverse' },
   { to: '/comparacao', label: 'Comparação', icon: 'bi-bar-chart-line' },
+  { to: '/tendencias', label: 'Tendências', icon: 'bi-graph-up-arrow' },
   { to: '/sobre', label: 'Sobre', icon: 'bi-info-circle' },
 ]
 </script>

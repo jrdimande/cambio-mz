@@ -61,7 +61,7 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', closeOnOutside
         @click="chooseCurrency(currency)"
       >
         <CurrencyFlag :country-code="currency.countryCode" :country-name="currency.country" />
-        <span class="picker-option-copy"><strong>{{ currency.country ?? currency.code }}</strong><small>{{ currency.name }}</small></span>
+        <span class="picker-option-copy"><strong>{{ currency.name }}</strong><small>{{ currency.code }}</small></span>
         <span class="picker-option-code">{{ currency.code }}</span>
       </button>
     </div>
