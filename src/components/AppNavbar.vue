@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 defineProps({ title: String, eyebrow: String, darkMode: Boolean, menuOpen: Boolean })
@@ -7,7 +7,6 @@ const emit = defineEmits(['toggle-menu', 'toggle-theme'])
 const router = useRouter()
 const searchInput = ref(null)
 const query = ref('')
-const today = computed(() => new Intl.DateTimeFormat('pt-MZ', { dateStyle: 'full' }).format(new Date()))
 
 watch(() => router.currentRoute.value.query.q, (value) => {
   query.value = typeof value === 'string' ? value : ''
@@ -47,8 +46,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleSearchShortcut
         <input ref="searchInput" v-model="query" type="search" aria-label="Pesquisar moeda" placeholder="Pesquisar moeda…" autocomplete="off" />
         <kbd>/</kbd>
       </form>
-      <div class="top-date"><i class="bi bi-calendar3"></i><span>{{ today }}</span></div>
-      <span class="demo-badge"><i></i> TAXAS DE REFERÊNCIA</span>
       <button
         class="theme-toggle"
         type="button"
